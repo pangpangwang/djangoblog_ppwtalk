@@ -1,0 +1,75 @@
+{% extends "blog/base.html" %}
+{% load comments %}
+
+{% block title %}{{ article.title }}{% endblock%}
+
+<!--{% block breadcrumb %}
+<ul class="breadcrumb">
+  <li><a href="/">Home</a> <span class="divider"></span></li>
+  <li><a href="{% url 'blog_article_index' %}">Blog</a> <span class="divider"></span></li>
+  <li class="active">{{ article.title }}</li>
+</ul>
+{% endblock %}-->
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h3 class="single-title"><span class="fa fa-leanpub fa-1x"></span> {{ article.title }}</h3> 
+		<span><span class="fa fa-tags fa-1x"></span>{% for category in article.categories.all %}<a class="meta_single_categories" href="{% url 'blog_category_archive' slug=category.slug %}">  {{ category.title }}</a>  {% endfor %}</span>
+        <p class="meta_single_date">{{ article.date_publish|date:"F j, Y" }}</p>
+		
+        <!--<p class="meta_signle">{% for category in article.categories.all %}<a class="btn btn-default btn-sm" href="{% url 'blog_category_archive' slug=category.slug %}">{{ category.title }}</a> {% endfor %}</p>-->
+		{{ article.content_markup|safe}}		
+		
+        <p title="likes"><a href="{% url 'blog_article_single_likes' slug=article.slug %}"><span title="likes-heart" class="fa fa-heart fa-3x"></span></a> x {{ article.likes }}</p>
+        
+		<!--{% if request.user.is_staff %}[ <a class="edit-link" href="{{ article.get_admin_url }}">Edit</a> ]{% endif %}-->
+        <hr />
+
+        <div id="wrap_comments">
+            {% get_comment_list for article as comment_list %}
+            {% if comment_list.count > 0 %}
+            <h3> <span class="fa fa-comments"></span>  Discussion</h3>
+            {% for comment in comment_list %}
+                <blockquote>
+                    <a name="{{ comment.id }}"></a>
+                    <p><!--<a href="{% get_comment_permalink comment %}">-->{{ forloop.counter }}</a> : {{ comment.comment }}</p>
+                    <small>{% if comment.url %}<a href="{{ comment.url }}" target="_blank">{{ comment.name }}</a>{% else %}{{ comment.name }}{% endif %} on <cite title="#{{ forloop.counter }}">{{ comment.submit_date|date }}</cite></small>
+                </blockquote>
+            {% endfor %}
+            {% endif %}
+
+            <h3 class="single-comment"><span class="fa fa-pencil-square-o fa-1x"></span>  Leave a Comment</h3>
+            
+            {% get_comment_form for article as form %}
+            <form action="{% comment_form_target %}" method="post">{% csrf_token %}
+			
+                <div class="fluid">
+                    
+                        {{ form.non_field_errors }}
+
+                        {{ form.content_type.as_hidden }}
+                        {{ form.object_pk.as_hidden }}
+                        {{ form.timestamp.as_hidden }}
+                        {{ form.security_hash.as_hidden }}
+
+                        {{ form.honeypot.as_hidden }}
+                        <div>{{ form.name.label_tag }}</div>{{ form.name }}{{ form.name.errors }}
+                        <div>{{ form.email.label_tag }}</div>{{ form.email }}{{ form.email.errors }}
+                        <!--{{ form.url.label_tag }}{{ form.url }}{{ form.url.errors }}-->
+                    
+                    <div class="span8 push">
+                        <div>{{ form.comment.label_tag }}</div>
+						{{ form.comment }}{{ form.comment.errors }}
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <input type="hidden" name="next" value="{{ request.path }}" />
+                    <input title="single-post" type="submit" name="submit" value="Commit" class="btn btn-danger" />
+                    <!--<input type="submit" name="preview" value="Preview" class="btn" />-->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

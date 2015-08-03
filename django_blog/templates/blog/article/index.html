@@ -1,0 +1,79 @@
+{% extends "blog/base.html" %}
+{% load comments %}
+
+{% block title %} {{ block.super }}{% endblock%}
+
+<!--{% block breadcrumb %}
+<ul class="breadcrumb">
+  <li><a href="/">Home</a> <span class="divider"></span></li>
+  <li class="active">Blog</li>
+</ul>
+{% endblock %}-->
+
+{% block content %}
+<div class="row">
+    <div class="col-md-9">
+        {% for item in articles %}
+        <article class="news-item">
+            <h4 class="title"><a href="{% url 'blog_article_single' slug=item.slug %}"><span class="fa fa-leanpub fa-1x"></span> {{ item.title }}</a></h4>
+            {{ item.abstract}}
+			<div class="meta">{{ item.date_publish|date:"F j, Y" }}</div>
+            <div class="text">
+                <p>{{ item.excerpt|safe }}</p>
+                {% get_comment_count for item as comment_count %}
+                <p><span class="fa fa-eye"></span>({{item.visit}})&nbsp;<span class="fa fa-heart"></span>({{item.likes}})&nbsp;<span class="fa fa-comments fa-1x"></span>({{ comment_count }})</p>
+            </div>
+			
+        </article>
+        {% endfor %}
+
+        <div class="page_nav">
+            
+                {% if articles.has_previous %}
+                <a href="?page={{ articles.previous_page_number }}"><span class="fa fa-chevron-circle-left fa-lg"></span></a>
+                {% else %}
+                <span class="disabled"><span class="fa fa-chevron-circle-left fa-lg"></span></span>
+                {% endif %}
+
+                <span class="page_nav_number">{{ articles.number }}</span>
+
+                {% if articles.has_next %}
+                <a href="?page={{ articles.next_page_number }}"><span class="fa fa-chevron-circle-right fa-lg"></span></a>
+                {% else %}
+                <span class="disabled"><span class="fa fa-chevron-circle-right fa-lg"></span></span>
+                {% endif %}
+            
+        </div>
+		
+    </div>
+    <div class="col-md-3">
+        <ul>
+			{% if archive_dates|length > 0 %}
+			
+			<li class="nav nav-header"><span class="fa fa-tags fa-1x"></span> Categories</li>
+            {% for tmp in categories %}
+            <nav>{% if category.slug == tmp.slug %}<span title="active-category" class="fa fa-square fa-1x"></span><a href="{% url 'blog_category_archive' slug=tmp.slug %}"> {{ tmp.title }}</a>
+			{% else %}<span class="fa fa-square fa-1x"></span><a href="{% url 'blog_category_archive' slug=tmp.slug %}"> {{ tmp.title }}</a>
+			{% endif %}</nav>
+			
+            {% endfor %}
+			
+			
+			
+			<li class="nav nav-header"><span class="fa fa-calendar fa-1x"></span> Archive Dates</li>
+			
+            {% for date in archive_dates %}
+            <nav>	
+					
+			<span class="fa fa-square fa-1x"></span><a href="{% url 'blog_date_archive' month=date|date:"m" year=date|date:"Y" %}"> {{ date|date:"Y M" }}{{symbol}}</a>
+			</nav>
+			{% endfor %}
+			
+            <li class="nav nav-header"><span class="fa fa-star fa-1x"></span> Donate</li>
+			<div ><img  src="{{ STATIC_URL }}image/zhifubao.png" width="100"></img></div>
+			
+        {% endif %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

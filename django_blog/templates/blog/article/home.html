@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="Shortcut Icon" href="{{ STATIC_URL }}image/ppwtalk.ico">
+		<title>
+			{% block title %}{% endblock %}
+		</title>
+		
+		<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+		<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap-theme.min.css" rel="stylesheet">
+		<link href="{{ STATIC_URL }}css/cover.css"  rel="stylesheet">
+		<link href="{{ STATIC_URL }}css/pygments.css" rel="stylesheet">
+		<link href="{{ STATIC_URL }}css/font-awesome.min.css" rel="stylesheet">	
+	</head>
+
+  <body>
+
+    <div class="home-site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+        
+        <div class="inner home-cover">
+            <h1 class="cover-heading">P.P.W. Talk.</h1>
+			<p>
+			<img src="{{ STATIC_URL}}image/head.png" width="64" height="64" />
+			</p>
+            <p class="lead">Focus on technology, entertainment and design. </p>
+			<p class="lead">Live a balance life.</p>
+            <p class="lead">
+              <a href="{% url 'blog_article_index' %}"  class="btn btn-lg btn-danger">Go!</a>
+            </p>
+        </div>
+        
+        
+
+        </div>
+		<div class="mastfoot">
+			<p>Blog of <a class='foot' href="http://weibo.com/u/1919516893/" target="_blank">pangpangwang</a>, by <a class='foot' href="https://www.djangoproject.com/"target="_blank">Django</a>, &copy 2015 copyright.</p>	
+		</div>
+		</div>
+      </div>
+
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/docs.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+{% extends "blog/article/index.html" %}
+{% load comments %}
+
+{% block title %}Archive: {{ start|date:"Y-m-d" }} ~ {{ end|date:"Y-m-d" }} | Blog | {{ block.super }}{% endblock%}
+
+{% block breadcrumb %}
+<ul class="breadcrumb">
+  <li><a href="/">Home</a> <span class="divider"></span></li>
+  <li><a href="{% url 'blog_article_index' %}">Blog</a> <span class="divider"></span></li>
+  <li class="active">Archive: {{ start|date:"Y-m-d" }} ~ {{ end|date:"Y-m-d" }}</li>
+</ul>
+{% endblock %}

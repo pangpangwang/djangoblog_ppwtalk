@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<link rel="Shortcut Icon" href="{{ STATIC_URL }}image/ppwtalk.ico">
+		<title>
+			{% block title %}{% endblock %}
+		</title>
+		<!--css-->
+		<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+		<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap-theme.min.css" rel="stylesheet">
+		<link href="{{ STATIC_URL }}css/cover.css"  rel="stylesheet">
+		<link href="{{ STATIC_URL }}css/pygments.css" rel="stylesheet">
+		<link href="{{ STATIC_URL }}css/font-awesome.min.css" rel="stylesheet">	
+		<!--js-->
+		<script src="{{ STATIC_URL }}js/jquery-1.10.1.min.js"></script>
+	</head>
+	
+	<body >
+	 	<div class="site-wrapper">
+			<div class="site-wrapper-inner">
+				<div class="cover-container">
+					<div class="masthead clearfix" >
+						<div class="inner">
+						<h3 class="masthead-brand"><a  href='/'>P.P.W. Talk</a></h3>
+						
+						
+						<nav>
+						<ul class="nav masthead-nav">
+							
+												
+							<li {% if "/blog/" == request.path %} class="active"{% endif %} ><a href="{% url 'blog_article_index' %}"><span class="fa fa-book fa-1.2px"></span> Blog</a></li>
+							<li><a href=" {% url 'blog_about' %}" target="_blank"><span class="fa fa-user fa-1.2x"></span> About</a></li>
+							<li><a href="http://weibo.com/u/1919516893/" target="_blank"><span class="fa fa-weibo"> </span> Weibo</a></li>
+							
+							
+							<li>
+							<form method="get" action="/search"  class="form-group has-success visible-lg">		
+							<input id="id_q" name="q" type="search" class="form-control input-sm" placeholder="Search"   style="width: 160px;">	
+							</form>
+							</span>
+							</li>
+							
+							
+							<!--<li>
+							<form method="get" action="/search">
+							<span class="col-lg-3">
+							<span class="input-group">
+							<span class="input-group-btn">
+							<span class="fa fa-search fa-1.2px">
+							</span>
+							<input id="id_q" name="q" type="search" class="form-control" placeholder="Search for...">
+							</span>
+							</span>
+							</form>
+							</li>-->
+							
+							
+						</ul>
+						</nav>
+						</div>
+					</div>
+					
+					
+					<div class="inner cover" >
+					
+					<!--{% block breadcrumb %}{% endblock %}-->
+					{% block content %}{% endblock%}
+					</div>					
+					
+					<div class="back-to-top",id="scroll">
+					<a><span class="fa fa-arrow-up fa-2x"></a></span>
+					</div>
+					<!--<div class="music-player" >
+					<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=110 src="http://music.163.com/outchain/player?type=0&id=51642432&auto=0&height=90"></iframe>
+					</div>-->
+				</div>
+				<div class="mastfoot">						
+				<p>Blog of <a class='foot' href="http://weibo.com/u/1919516893/" target="_blank">pangpangwang</a>, by <a class='foot' href="https://www.djangoproject.com/"target="_blank">Django</a>, &copy 2015 copyright.</p>		
+				</div>
+			</div>	
+		</div>
+		<script type="text/javascript">
+		$(function()
+		{
+			showScroll();
+			function showScroll()
+			{
+			$(window).scroll( function() { 
+				
+				var scrollValue=$(window).scrollTop();
+				scrollValue > 100 ? $('div[class=back-to-top]').fadeIn():$('div[class=back-to-top]').fadeOut();
+			} );	
+			$('div[class=back-to-top]').click(function(){
+				$("html,body").animate({scrollTop:0},200);	
+			});	
+			}
+		})
+	</script>
+	</body>
+</html>

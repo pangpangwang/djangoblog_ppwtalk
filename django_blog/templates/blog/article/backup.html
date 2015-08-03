@@ -1,0 +1,17 @@
+<div>
+            <ul class="page_nav">
+                {% if articles.has_previous %}
+                <li><a href="?page={{ articles.previous_page_number }}">Previous</a></li>
+                {% else %}
+                <li class="disabled"><span>Previous</span></li>
+                {% endif %}
+
+                <li class="active"><span>{{ articles.number }}</span></li>
+
+                {% if articles.has_next %}
+                <li><a href="?page={{ articles.next_page_number }}">Next</a></li>
+                {% else %}
+                <li class="disabled"><span>Next</span></li>
+                {% endif %}
+            </span>
+        </div>

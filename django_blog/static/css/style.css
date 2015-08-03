@@ -1,0 +1,49 @@
+/* Sticky footer styles
+-------------------------------------------------- */
+
+
+/* Wrapper for page content to push down footer */
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    /* Negative indent footer by it's height */
+    margin: 0 auto -60px;
+}
+
+
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+#wrap {
+    width: auto;
+    max-width: 1000px;
+    padding:20px;
+    background-color:#fff;
+}
+.container {
+    width: auto;
+    max-width: 1000px;
+}
+.container .credit {
+    margin: 20px 0;
+}
+
+/*Fix for syntax highlighing*/
+div.codehilite pre, .linenodiv pre {
+    background-color:#2B2626;
+}
+.linenodiv pre {
+    color: #fff;
+}
+
+article.news-item
+{
+    border-bottom:1px solid #ccc;
+    margin-bottom:10px;
+    padding-bottom:10px;
+}
+*/
