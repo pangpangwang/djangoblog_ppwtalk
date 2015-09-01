@@ -9,5 +9,7 @@ This blog written in Django 1.8 using Python 2.7. You can download it and run `p
 * The icons are based on [`fontawesome`](http://fontawesome.io/)
 * It support [`Markdown`](https://guides.github.com/features/mastering-markdown/) in Blog and Comment
 
+### Screenshot
+![Alt text](http://7xawfw.com1.z0.glb.clouddn.com/enter.jpg)
 ### To do next
 *  Support `ajax` in **Like** and **Comment**
